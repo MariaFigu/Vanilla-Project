@@ -15,7 +15,85 @@
   </head>
   <body>
     <div class="container">
-      <h1>hello</h1>
+      <div class="card mb-3" style="max-width: 540px">
+        <div class="row no-gutters">
+          <div class="col-8">
+            <nav class="navbar navbar-light">
+              <form class="form-inline" id="search-bar">
+                <input
+                  class="form-control mr-sm-2"
+                  type="search"
+                  placeholder="Search City"
+                  aria-label="Search"
+                  id="search-city"
+                />
+                <button
+                  class="btn btn-outline-success my-2 my-sm-0"
+                  type="submit"
+                  id="magnifier"
+                >
+                  🔎
+                </button>
+                <button
+                  class="btn btn-outline-success"
+                  type="submit"
+                  id="current-location"
+                >
+                  📍
+                </button>
+              </form>
+            </nav>
+            <div class="card-text p-3">
+              <h1></h1>
+              <h2></h2>
+              <div class="date"></div>
+              <div class="hour"></div>
+            </div>
+            <div class="card-temperature p-3">
+              <span class="temp"></span>
+              <span class="units"
+                ><a href="#" id="celsius">°C</a> |
+                <a href="#" id="fahreneit"> °F</a></span
+              >
+              <div class="realfeel"></div>
+              <div class="mood"></div>
+            </div>
+            <div class="card-wind p-3">
+              <div class="card-1" id="chance-rain">Chance of rain: 39%</div>
+              <div class="card-1" id="wind-speed">Wind: 23 Km/h</div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="card-body text-center">
+              <div class="card-day border rounded-pill">
+                <strong> Sat </strong> <br />🌞 <br />
+                <small>27°C/23°C</small>
+              </div>
+              <div class="card-day border rounded-pill">
+                <strong>Sun</strong> <br />🌞 <br />
+                <small>27°C/23°C</small>
+              </div>
+              <div class="card-day border rounded-pill">
+                <strong>Mon</strong> <br />🌞 <br />
+                <small>27°C/23°C</small>
+              </div>
+              <div class="card-day border rounded-pill">
+                <strong>Tue</strong> <br />🌞 <br />
+                <small>27°C/23°C</small>
+              </div>
+              <div class="card-day border rounded-pill">
+                <strong>Wed</strong> <br />🌞 <br />
+                <small>27°C/23°C</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <small
+        ><a href="https://https://github.com/MariaFigu/Vanilla-Project"
+          >Open-source code</a
+        >, by Maria Figueiredo</small
+      >
     </div>
     <script src="src/index.js"></script>
   </body>
