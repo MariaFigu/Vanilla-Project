@@ -20,6 +20,8 @@ let day = days[currentTime.getDay()];
 
 let globalCelsius;
 let globalFahreneit;
+let realFeelCelsius;
+let realFeelFahreneit;
 
 function showTemperature(response) {
   let city = response.data.name;
@@ -31,13 +33,17 @@ function showTemperature(response) {
   globalCelsius = temp;
   globalFahreneit = Math.round((temp * 9) / 5 + 32);
 
+  let realFeel = Math.round(response.data.main.feels_like);
+  realFeelCelsius = realFeel;
+  realFeelFahreneit = Math.round((realFeel * 9) / 5 + 32);
+
   let humidity = response.data.main.humidity;
   let windSpeed = response.data.wind.speed;
 
-  showDetails(city, temp, description, humidity, windSpeed);
+  showDetails(city, temp, description, realFeel, humidity, windSpeed);
 }
 
-function showDetails(city, temp, description, humidity, windSpeed) {
+function showDetails(city, temp, description, realFeel, humidity, windSpeed) {
   let h2 = document.querySelector("h2");
   h2.innerHTML = city;
 
@@ -60,6 +66,9 @@ function showDetails(city, temp, description, humidity, windSpeed) {
   let mood = document.querySelector(".mood");
   mood.innerHTML = description;
 
+  let feeling = document.querySelector("#real-feel");
+  feeling.innerHTML = `Real Feel: ${realFeel}°`;
+
   let rain = document.querySelector("#chance-rain");
   rain.innerHTML = `Humidity: ${humidity}%`;
 
@@ -72,6 +81,9 @@ function currentTempCelsius(event) {
 
   let temp = document.querySelector(".temp");
   temp.innerHTML = globalCelsius;
+
+  let feeling = document.querySelector("#real-feel");
+  feeling.innerHTML = `Real Feel: ${realFeelCelsius}°`;
 }
 
 let celsius = document.querySelector("#celsius");
@@ -82,6 +94,9 @@ function currentTempFahr(event) {
 
   let temp = document.querySelector(".temp");
   temp.innerHTML = globalFahreneit;
+
+  let feeling = document.querySelector("#real-feel");
+  feeling.innerHTML = `Real Feel: ${realFeelFahreneit}°`;
 }
 
 let fahreneit = document.querySelector("#fahreneit");
