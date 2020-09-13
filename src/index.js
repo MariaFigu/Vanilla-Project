@@ -1,30 +1,54 @@
-let currentTime = new Date();
-let month = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-month = month[currentTime.getMonth()];
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
 
-let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-let day = days[currentTime.getDay()];
+  let months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  month = months[date.getMonth()];
+
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let day = days[date.getDay()];
+
+  return `${day}, ${date.getDate()} ${month} ${date.getFullYear()}`;
+}
+
+function formatHours(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+
+  return `${hours}:${minutes}`;
+}
 
 let globalCelsius;
 let globalFahreneit;
 let realFeelCelsius;
 let realFeelFahreneit;
+let iconElement;
 
 function showTemperature(response) {
   let city = response.data.name;
+  let timestamp = response.data.dt;
+
+  let iconElement = response.data.weather[0].icon;
+
   let temp = Math.round(response.data.main.temp);
   let description = response.data.weather[0].description;
 
@@ -40,25 +64,42 @@ function showTemperature(response) {
   let humidity = response.data.main.humidity;
   let windSpeed = response.data.wind.speed;
 
-  showDetails(city, temp, description, realFeel, humidity, windSpeed);
+  showDetails(
+    city,
+    timestamp,
+    iconElement,
+    temp,
+    description,
+    realFeel,
+    humidity,
+    windSpeed
+  );
 }
 
-function showDetails(city, temp, description, realFeel, humidity, windSpeed) {
+function showDetails(
+  city,
+  timestamp,
+  iconElement,
+  temp,
+  description,
+  realFeel,
+  humidity,
+  windSpeed
+) {
   let h2 = document.querySelector("h2");
   h2.innerHTML = city;
 
   let date = document.querySelector(".date");
-  date.innerHTML =
-    day +
-    ", " +
-    currentTime.getDate() +
-    " " +
-    month +
-    " " +
-    currentTime.getFullYear();
+  date.innerHTML = formatDate(timestamp * 1000);
 
   let hour = document.querySelector(".hour");
-  hour.innerHTML = currentTime.toLocaleTimeString();
+  hour.innerHTML = "Last updated: " + formatHours(timestamp * 1000);
+
+  let icon = document.querySelector("#icon");
+  icon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${iconElement}@2x.png`
+  );
 
   let degrees = document.querySelector(".temp");
   degrees.innerHTML = temp;
@@ -109,6 +150,30 @@ function showCoords(position) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(showTemperature);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
+function displayForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = null;
+  let forecast = null;
+
+  for (let index = 0; index < 5; index++) {
+    forecast = response.data.list[index];
+    forecastElement.innerHTML += ` 
+      <div class="card-day border rounded-pill">
+                <strong> ${formatHours(
+                  forecast.dt * 1000
+                )}</strong>  <img src= "http://openweathermap.org/img/wn/${
+      forecast.weather[0].icon
+    }.png" > <br />
+                <small> <strong>${Math.round(
+                  forecast.main.temp_max
+                )}°</strong> /${Math.round(forecast.main.temp_min)}°</small>
+              </div>`;
+  }
 }
 
 function showCity(city) {
@@ -116,6 +181,9 @@ function showCity(city) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(showTemperature);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function getCurrentPosition() {

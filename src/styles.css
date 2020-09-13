@@ -22,6 +22,11 @@ button {
   width: 50px;
 }
 
+.card-temperature {
+  align-items: center;
+  display: flex;
+}
+
 .units {
   position: relative;
   top: -16px;

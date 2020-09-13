@@ -49,13 +49,14 @@
               <div class="date"></div>
               <div class="hour"></div>
             </div>
-            <div class="card-temperature p-3">
-              <img src="http://res.publicdomainfiles.com/pdf_view/65/13920112214859.png" alt="clear" width="100px" /><span class="temp"></span>
+            <div class="card-temperature pl-3">
+              <img alt="clear" id="icon" /><span class="temp"></span>
               <span class="units"></span>
-                
-                <a href="#" id="celsius">°C</a> |
-                <a href="#" id="fahreneit"> °F</a></span
-              >
+
+              <a href="#" id="celsius">°C</a> |
+              <a href="#" id="fahreneit"> °F</a>
+            </div>
+            <div class="card-feel pl-3">
               <div class="realfeel"></div>
               <div class="mood"></div>
             </div>
@@ -66,35 +67,16 @@
             </div>
           </div>
           <div class="col-4">
-            <div class="card-body text-center">
-              <div class="card-day border rounded-pill">
-                <strong> Sat </strong> <br />🌞 <br />
-                <small>27°C/23°C</small>
-              </div>
-              <div class="card-day border rounded-pill">
-                <strong>Sun</strong> <br />🌞 <br />
-                <small>27°C/23°C</small>
-              </div>
-              <div class="card-day border rounded-pill">
-                <strong>Mon</strong> <br />🌞 <br />
-                <small>27°C/23°C</small>
-              </div>
-              <div class="card-day border rounded-pill">
-                <strong>Tue</strong> <br />🌞 <br />
-                <small>27°C/23°C</small>
-              </div>
-              <div class="card-day border rounded-pill">
-                <strong>Wed</strong> <br />🌞 <br />
-                <small>27°C/23°C</small>
-              </div>
-            </div>
+            <div class="card-body text-center" id="forecast"></div>
           </div>
         </div>
-        
       </div>
       <div class="open-code pl-3">
-        <small><a href="https://https://github.com/MariaFigu/Vanilla-Project">Open-source code</a>, by Maria
-          Figueiredo</small>
+        <small
+          ><a href="https://https://github.com/MariaFigu/Vanilla-Project"
+            >Open-source code</a
+          >, by Maria Figueiredo</small
+        >
       </div>
     </div>
     <script src="src/index.js"></script>
