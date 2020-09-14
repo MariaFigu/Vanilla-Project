@@ -7,9 +7,22 @@
   padding: 10px;
   margin: 20px auto;
   max-width: 600px;
+  background: linear-gradient(
+    to right,
+    rgba(147, 206, 222, 1) 0%,
+    rgba(107, 171, 189, 1) 50%,
+    rgba(41, 126, 150, 1) 100%
+  );
+  border-radius: 15px;
 }
+.card {
+  background: transparent;
+  border: 0;
+}
+
 .card-day {
   margin: 5px;
+  border-radius: 1rem;
 }
 .card-body {
   font-size: 14px;
@@ -34,6 +47,4 @@ button {
 }
 .mood {
   text-transform: capitalize;
-}
-.open-code {
 }

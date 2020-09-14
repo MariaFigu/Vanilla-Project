@@ -108,13 +108,13 @@ function showDetails(
   mood.innerHTML = description;
 
   let feeling = document.querySelector("#real-feel");
-  feeling.innerHTML = `Real Feel: ${realFeel}°`;
+  feeling.innerHTML = `<strong>Real Feel: </strong>${realFeel}°`;
 
   let rain = document.querySelector("#chance-rain");
-  rain.innerHTML = `Humidity: ${humidity}%`;
+  rain.innerHTML = `<strong>Humidity: </strong>${humidity}%`;
 
   let wind = document.querySelector("#wind-speed");
-  wind.innerHTML = `Wind speed: ${windSpeed}`;
+  wind.innerHTML = `<strong>Wind speed: </strong>${windSpeed}`;
 }
 
 function currentTempCelsius(event) {
@@ -124,7 +124,7 @@ function currentTempCelsius(event) {
   temp.innerHTML = globalCelsius;
 
   let feeling = document.querySelector("#real-feel");
-  feeling.innerHTML = `Real Feel: ${realFeelCelsius}°`;
+  feeling.innerHTML = `<strong>Real Feel: </strong>${realFeelCelsius}°`;
 }
 
 let celsius = document.querySelector("#celsius");
@@ -137,7 +137,7 @@ function currentTempFahr(event) {
   temp.innerHTML = globalFahreneit;
 
   let feeling = document.querySelector("#real-feel");
-  feeling.innerHTML = `Real Feel: ${realFeelFahreneit}°`;
+  feeling.innerHTML = `<strong>Real Feel: </strong>${realFeelFahreneit}°`;
 }
 
 let fahreneit = document.querySelector("#fahreneit");
@@ -163,7 +163,7 @@ function displayForecast(response) {
   for (let index = 0; index < 5; index++) {
     forecast = response.data.list[index];
     forecastElement.innerHTML += ` 
-      <div class="card-day border rounded-pill">
+      <div class="card-day border">
                 <strong> ${formatHours(
                   forecast.dt * 1000
                 )}</strong>  <img src= "http://openweathermap.org/img/wn/${
