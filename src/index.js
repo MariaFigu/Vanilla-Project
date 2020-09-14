@@ -190,7 +190,9 @@ function getCurrentPosition() {
   navigator.geolocation.getCurrentPosition(showCoords);
 }
 
-getCurrentPosition();
+//getCurrentPosition();
+showCity("Lisbon");
+
 let currentCity = document.querySelector("#current-location");
 currentCity.addEventListener("click", getCurrentPosition);
 
